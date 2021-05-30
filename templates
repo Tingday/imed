@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}{{ "(第%d页，共%d题)"|format(page, total) }}</title>
+</head>
+<body>
+<p>{{ title }}{{ "(第%d页，共%d题)"|format(page, total) }}</p>
+{% for question in questions %}
+    <p>{{ "%d.%s"|format(question.linkNo - (page -1) * total ,question.topic) |safe }}</p>
+    {% for choiceAnswer in question.choiceAnswers %}
+        <p>{{ choiceAnswer.mark + "." + choiceAnswer.choiceAnswer |safe }}</p>
+    {% endfor %}
+    <p>答案：{{ question.rightResult }}</p>
+    <p>解释：{{ question.answerAnalyse }}</p>
+    <br/>
+{% endfor %}
+</body>
+</html>
